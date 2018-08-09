@@ -1,0 +1,20 @@
+server:
+    port: 9999
+    
+#mongodb
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: Test
+
+#logging
+logging:
+  level:
+    ROOT: error
+    org:
+      springframework:
+        data: debug
+    
+    
