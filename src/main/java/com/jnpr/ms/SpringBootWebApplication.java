@@ -1,4 +1,4 @@
-package mx.gob.sat.disolucion;
+package com.jnpr.ms;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package mx.gob.sat.disolucion;
+package com.jnpr.ms;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -6,10 +6,9 @@ import org.springframework.data.mongodb.config.AbstractReactiveMongoConfiguratio
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 
+import com.jnpr.ms.repository.UserRepository;
 import com.mongodb.reactivestreams.client.MongoClient;
 import com.mongodb.reactivestreams.client.MongoClients;
-
-import mx.gob.sat.disolucion.repository.UserRepository;
 
 @Configuration
 @EnableReactiveMongoRepositories(basePackageClasses = UserRepository.class)

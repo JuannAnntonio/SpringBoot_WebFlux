@@ -1,11 +1,11 @@
-package mx.gob.sat.disolucion.repository;
+package com.jnpr.ms.repository;
 
 import java.util.List;
 
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
-import mx.gob.sat.disolucion.model.User;
+import com.jnpr.ms.model.User;
 
 public interface UserRepository extends ReactiveMongoRepository<User, String> {
 

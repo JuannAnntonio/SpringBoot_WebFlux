@@ -1,4 +1,4 @@
-package mx.gob.sat.disolucion;
+package com.jnpr.ms;
 
 import javax.validation.Valid;
 
@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import mx.gob.sat.disolucion.model.User;
-import mx.gob.sat.disolucion.repository.UserRepository;
+import com.jnpr.ms.model.User;
+import com.jnpr.ms.repository.UserRepository;
+
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
