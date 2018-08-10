@@ -3,7 +3,6 @@ package mx.gob.sat.disolucion;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +23,6 @@ import reactor.core.publisher.Mono;
 public class UserController {
 
 	@Autowired
-	@Qualifier("userRepository")
 	private UserRepository userRepo;
 
 	@GetMapping("/users")

@@ -9,7 +9,6 @@ public class User {
 
 	@Id
 	private String id;
-
 	@Field("nombre")
 	private String nombre;
 	@Field("edad")
