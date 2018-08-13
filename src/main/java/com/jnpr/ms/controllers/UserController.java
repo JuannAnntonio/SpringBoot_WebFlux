@@ -1,4 +1,4 @@
-package com.jnpr.ms;
+package com.jnpr.ms.controllers;
 
 import javax.validation.Valid;
 
@@ -12,37 +12,43 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jnpr.ms.model.User;
 import com.jnpr.ms.repository.UserRepository;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
+@RequestMapping("/user")
+@Api(value = "Users microservice")
 public class UserController {
 
 	@Autowired
 	private UserRepository userRepo;
 
-	@GetMapping("/users")
-	public Flux<User> getAllTweets() {
+	@GetMapping("/all")
+	@ApiOperation(value = "Find all user", notes = "Return all users")
+	public Flux<User> getAllUsers() {
 		return userRepo.findAll();
 	}
 
-	@PostMapping("/users")
-	public Mono<User> createTweets(@Valid @RequestBody User user) {
+	@PostMapping("/new")
+	public Mono<User> createUser(@Valid @RequestBody User user) {
 		return userRepo.save(user);
 	}
 
-	@GetMapping("/users/{id}")
-	public Mono<ResponseEntity<User>> getTweetById(@PathVariable(value = "id") String userId) {
+	@GetMapping("/search/{id}")
+	public Mono<ResponseEntity<User>> getUserById(@PathVariable(value = "id") String userId) {
 		return userRepo.findById(userId).map(savedTweet -> ResponseEntity.ok(savedTweet))
 				.defaultIfEmpty(ResponseEntity.notFound().build());
 	}
 
-	@PutMapping("/users/{id}")
+	@PutMapping("/update/{id}")
 	public Mono<ResponseEntity<User>> updateName(@PathVariable(value = "id") String userId,
 			@Valid @RequestBody User user) {
 		return userRepo.findById(userId).flatMap(existingUser -> {
@@ -52,15 +58,15 @@ public class UserController {
 				.defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
 
-	@DeleteMapping("/users/{id}")
-	public Mono<ResponseEntity<Void>> deleteTweet(@PathVariable(value = "id") String userId) {
+	@DeleteMapping("/delete/{id}")
+	public Mono<ResponseEntity<Void>> deleteUser(@PathVariable(value = "id") String userId) {
 		return userRepo.findById(userId).flatMap(
 				existingUser -> userRepo.delete(existingUser).then(Mono.just(new ResponseEntity<Void>(HttpStatus.OK))))
 				.defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
 
 	@GetMapping(value = "/stream/users", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-	public Flux<User> streamAllTweets() {
+	public Flux<User> streamAllUsers() {
 		return userRepo.findAll();
 	}
 
